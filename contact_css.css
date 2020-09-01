@@ -18,6 +18,6 @@
   bordder: 2px;
   color: black;
 }
-table, tr, td {
+.table{
   border: 1px solid black;
 }
