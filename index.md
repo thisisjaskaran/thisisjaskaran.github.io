@@ -1,6 +1,3 @@
----
-layout: default
----
 <head>
   <link rel="stylesheet" href="index_css.css">
 </head> 
@@ -12,7 +9,7 @@ layout: default
   <a href="pdfs/Resume.pdf">CV</a>  |  
   <a href="contact.html">Contact Me</a>
 </p>
-![dp](fb_dp)
+<img src="fb_dp">
 <p align="center" class="handles">
   <a href="https://www.linkedin.com/in/jaskaran-singh-sodhi/">
     <img src="linkedin.png" width="70" height="70">
