@@ -13,6 +13,7 @@
 }
 .button1:hover {
   background-color: #f2f2f2;
+  color: black;
 }
 a:link {
   text-decoration: none;
@@ -26,7 +27,6 @@ a:visited {
 
 a:hover {
   text-decoration: none;
-  color: black;
 }
 
 a:active {
