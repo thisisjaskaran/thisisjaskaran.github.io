@@ -15,5 +15,6 @@
 }
 .button1:hover {
   background-color: #f2f2f2;
+  bordder: 2px;
   color: black;
 }
