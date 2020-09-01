@@ -30,7 +30,6 @@ a:active {
   transition-duration: 0.4s;
 }
 .button1:hover {
-  border: 2px solid #212121;
   color: black;
 }
 table, tr, td {
