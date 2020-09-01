@@ -1,3 +1,19 @@
+.button {
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.button1
+{
+  background-color: #212121;
+  transition-duration: 0.4s;
+}
+.button1:hover {
+  background-color: #f2f2f2;
+}
 a:link {
   text-decoration: none;
   color: white;
@@ -16,22 +32,6 @@ a:hover {
 a:active {
   text-decoration: none;
   color: white;
-}
-.button {
-  border: none;
-  padding: 15px 32px;
-  text-align: center;
-  display: inline;
-  font-size: 16px;
-  border-radius: 4px;
-}
-.button1
-{
-  background-color: #212121;
-  transition-duration: 0.4s;
-}
-.button1:hover {
-  background-color: #f2f2f2;
 }
 table, tr, td {
   border: 1px solid black;
