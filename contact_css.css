@@ -9,6 +9,7 @@ a:visited {
 
 a:hover {
   text-decoration: underline;
+  color: black;
 }
 
 a:active {
@@ -29,7 +30,6 @@ a:active {
   transition-duration: 0.4s;
 }
 .button1:hover {
-  background-color: #123b6e;
   border: 2px solid #212121;
   color: black;
 }
