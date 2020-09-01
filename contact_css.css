@@ -15,10 +15,14 @@
 }
 .button1:hover {
   background-color: #f2f2f2;
-  bordder: 2px;
+  border: 2px;
   color: black;
 }
 table, tr, td {
   border: 1px solid black;
   border-collapse: collapse;
+}
+table
+{
+  overflow-x: scroll;
 }
