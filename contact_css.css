@@ -1,5 +1,4 @@
 .button {
-  background-color: #212121;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -11,6 +10,7 @@
 }
 .button1
 {
+  background-color: #212121;
   transition-duration: 0.4s;
 }
 .button1:hover {
