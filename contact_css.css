@@ -22,10 +22,6 @@ table, tr, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
-table
-{
-  overflow-x: scroll;
-}
 .table
 {
   margin-left: auto;
