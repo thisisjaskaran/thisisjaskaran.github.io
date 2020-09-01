@@ -10,3 +10,7 @@
   border-radius: 4px;
   transition-duration: 0.4s;
 }
+.button:hover {
+  background-color: #f2f2f2; /* Green */
+  color: #212121;
+}
