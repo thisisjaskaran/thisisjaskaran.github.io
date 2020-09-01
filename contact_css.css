@@ -5,6 +5,7 @@
   display: inline;
   font-size: 16px;
   border-radius: 4px;
+  color: #f2f2f2;
 }
 .button1
 {
@@ -12,27 +13,22 @@
   transition-duration: 0.4s;
 }
 .button1:hover {
-  background-color: #f2f2f2;
-  color: black;
+  background-color: #194285;
 }
 a:link {
   text-decoration: none;
-  color: white;
 }
 
 a:visited {
   text-decoration: none;
-  color: white;
 }
 
 a:hover {
   text-decoration: none;
-  color: black;
 }
 
 a:active {
   text-decoration: none;
-  color: white;
 }
 table, tr, td {
   border: 1px solid black;
