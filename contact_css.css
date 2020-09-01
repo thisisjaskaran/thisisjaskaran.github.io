@@ -10,10 +10,10 @@
 .button1
 {
   background-color: #212121;
-  transition-duration: 0.4s;
+  
 }
 .button1:hover {
-  background-color: #194285;
+  background-color: #454545;
 }
 a:link {
   text-decoration: none;
