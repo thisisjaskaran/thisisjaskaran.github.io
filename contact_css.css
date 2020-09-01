@@ -12,9 +12,6 @@
   background-color: #212121;
   
 }
-.button1:hover {
-  background-color: #2e2e2e;
-}
 a:link {
   text-decoration: none;
 }
@@ -24,7 +21,7 @@ a:visited {
 }
 
 a:hover {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a:active {
