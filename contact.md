@@ -1,0 +1,107 @@
+<head>
+  <link rel="stylesheet" href="contact_css.css">
+</head> 
+
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+<p align="center">
+  <a href="index.html">Home</a> | 
+  <a href="aboutme.html">About Me</a> | 
+  <a href="projects.html">Projects</a> | 
+  <a href="pdfs/Resume.pdf">CV</a> | 
+  <a href="contact.html">Contact Me</a>
+</p>
+
+<div style="overflow-x:auto;">
+  <table class="table">
+    <tr>
+      <td></td>
+      <td> 8am-9am </td>
+      <td> 9am-10am </td>
+      <td> 10am-11am </td>
+      <td> 11am-12pm </td>
+      <td> 12pm-1pm </td>
+      <td> 1pm-2pm </td>
+      <td> 2pm-3pm </td>
+      <td> 3pm-4pm </td>
+      <td> 4pm-5pm </td>
+      <td> 5pm-6pm </td>
+    </tr>
+    <tr>
+      <td> Monday </td>
+      <td> MA20101 </td>
+      <td> MA20101 </td>
+      <td></td>
+      <td></td>
+      <td> HS20001 </td>
+      <td align="center"> L </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td> AT30001 </td>
+    </tr>
+    <tr>
+      <td> Tuesday </td>
+      <td></td>
+      <td></td>
+      <td> HS20001 </td>
+      <td> HS20001</td>
+      <td> MA20101 </td>
+      <td align="center"> U </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td> Wednesday </td>
+      <td></td>
+      <td></td>
+      <td> IM21003 </td>
+      <td></td>
+      <td> ME20001 </td>
+      <td align="center"> N </td>
+      <td> BS20001 </td>
+      <td> BS20001 </td>
+      <td> EV20001 </td>
+      <td> EV20001 </td>
+    </tr>
+    <tr>
+      <td> Thursday </td>
+      <td> HS20001 </td>
+      <td> IM21003 </td>
+      <td></td>
+      <td> ME20001</td>
+      <td></td>
+      <td align="center"> C </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td> AT30001 </td>
+    </tr>
+    <tr>
+      <td> Friday </td>
+      <td></td>
+      <td> ME20001 </td>
+      <td> ME20001 </td>
+      <td> IM21003</td>
+      <td> IM21003 </td>
+      <td align="center"> H </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td> AT30001 </td>
+    </tr>
+  </table>
+</div>
+
+<br>
+
+<p align="center">
+  <a href="https://forms.gle/oCX1ZV1XkEnHTwkf8">
+    <button type="button" bgcolor="black" class="button">
+      <font color="white">Contact Me</font>
+    </button>
+  </a>
+</p>
+

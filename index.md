@@ -1,0 +1,34 @@
+---
+layout: default
+---
+<head>
+  <link rel="stylesheet" href="index_css.css">
+</head> 
+
+<p align="center">
+  <a href="index.html">Home</a>  |  
+  <a href="aboutme.html">About Me</a>  |  
+  <a href="projects.html">Projects</a>  |  
+  <a href="pdfs/Resume.pdf">CV</a>  |  
+  <a href="contact.html">Contact Me</a>
+</p>
+![dp](fb_dp)
+<p align="center" class="handles">
+  <a href="https://www.linkedin.com/in/jaskaran-singh-sodhi/">
+    <img src="linkedin.png" width="70" height="70">
+  </a>
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  <a href="https://github.com/thisisjaskaran">
+    <img src="github.png" width="70" height="70">
+  </a>
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  <a href="https://www.youtube.com/channel/UCDfCm0XICLYh82DnOZV5zxQ?view_as=subscriber">
+    <img src="youtube.png" width="80" height="80">
+  </a>
+</p>

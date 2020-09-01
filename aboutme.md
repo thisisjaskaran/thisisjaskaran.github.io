@@ -1,0 +1,24 @@
+<p align="center">
+  <a href="index.html">Home</a> | 
+  <a href="aboutme.html">About Me</a> | 
+  <a href="projects.html">Projects</a> | 
+  <a href="pdfs/Resume.pdf">CV</a> | 
+  <a href="contact.html">Contact Me</a>
+</p>
+<img src="fb_dp">
+<p align="center">
+  My name is Jaskaran Singh Sodhi and I am a second year undergraduate of the Department of Mechanical Engineering, IIT Kharagpur enrolled in its Manufacturing Science and Engineering B.Tech. course.
+</p>
+
+<p align="center">
+  I was born and raised in New Delhi and like to write and read in my leisure time.
+</p>
+
+<p align="center">
+  Extremely passionate about robotics, specifically controls, computer vision and SLAM.
+</p>
+
+<p align="center">
+  Feel free to ping for any queries or even drop by for a "Hello"!
+</p>
+
