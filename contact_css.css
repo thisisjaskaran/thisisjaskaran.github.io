@@ -26,3 +26,8 @@ table
 {
   overflow-x: scroll;
 }
+.table
+{
+  margin-left: auto;
+  margin-right: auto;
+}
