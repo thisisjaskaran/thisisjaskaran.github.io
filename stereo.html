@@ -89,16 +89,17 @@
                                 For this implementation, the coarse estimate of a GPS pose has been assumed, however, the same pipeline can be extended to
                                 GPS-denied environments, using frame-to-frame incremental pose update with only GPS initialisation.
                             </p>
+                            
+                            <p>
+                                <img src="images/local1.png" style="width: 55%; height: 55%"/><img src="images/local2.png" style="width: 46%; height: 46%"/>
+                            </p>
+                            
                             <p>
                                 The local map is generated via <a href="https://pointclouds.org/documentation/classpcl_1_1octree_1_1_octree_point_cloud_search.html">pcl::octree::OctreePointCloudSearch</a>,
                                 which searches for neighbours within a voxel at a given point which in our case is the initial pose obtained
                                 from <a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion">VINS-Fusion</a>.
                             </p>
-
-                            <p>
-                                <img src="images/local1.png" style="width: 55%; height: 55%"/><img src="images/local2.png" style="width: 46%; height: 46%"/>
-                            </p>
-
+                            
                             <p>
                                 <h3  style="text-align:left">Stage 2 : Depth Map Generation</h3>
                             </p>
