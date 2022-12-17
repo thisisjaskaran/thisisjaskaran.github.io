@@ -96,12 +96,32 @@
                             </p>
 
                             <p>
-                                <img src="images/local1.png" style="width: 50%; height: 50%"/><img src="images/local2.png" style="width: 50%; height: 50%"/>
+                                <img src="images/local1.png" style="width: 55%; height: 55%"/><img src="images/local2.png" style="width: 45%; height: 45%"/>
                             </p>
 
                             <p>
                                 <h4  style="text-align:left">Stage 2 : Depth Map Generation</h4>
-                                
+                            </p>
+
+                            <p>
+                                The left and the right image from the stereo camera is used to compute the disparity map. From disparity map, we obtain the depth of a point using the formula:
+
+                            </p>
+
+                            <p>
+                                disparity = x - x' = (B*f)/Z
+                            </p>
+                            
+                            <p>
+                                Here, B is baseline, i.e, distance between the left and right camera & f is the focal length of the camera. Z is the depth of that pixel value.
+                            </p>
+
+                            <p>
+                                Example, depth image:
+                            </p>
+
+                            <p>
+                                <img src="images/depth.png">
                             </p>
                             
                             <p>
