@@ -148,12 +148,29 @@
                             <p>
                                 <img src='images/pipeline.png'>
                             </p>
+                            
                             <p>
                                 In this work, we use a 4-stage process inspired by the <a href="https://ieeexplore.ieee.org/document/8594362">paper</a> "Stereo Camera Localization in 3D LiDAR Maps" by KAIST.
                             </p>
+
                             <p>
-                                <underline>Stage 1</underline>
-                                
+                                <h4  style="text-align:left"><name>Stage 1 : Local Map Extraction</h4>
+                                This stage uses an initial estimate (coarse) of the agent's pose and the global LiDAR map, and usea a kd-tree to
+                                extract the local map.
+
+                                For this implementation, the coarse estimate of a GPS pose has been assumed, however, the same pipeline can be extended to
+                                GPS-denied environments, using frame-to-frame incremental pose update with only GPS initialisation.
+                            </p>
+                            
+                            <p>
+                                <h4  style="text-align:left"><name>Stage 2 : Depth Map Generation</h4>
+                            </p>
+                            
+                            <p>
+                                <h4  style="text-align:left"><name>Stage 3 : Tracking</h4>
+                            </p>
+                            <p>
+                                <h4  style="text-align:left"><name>Stage 4 : Localization</h4>
                             </p>
                         </td>
                     </tr>
