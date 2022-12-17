@@ -155,15 +155,20 @@
 
                             <p>
                                 <h4  style="text-align:left">Stage 1 : Local Map Extraction</h4>
-                                This stage uses an initial estimate (coarse) of the agent's pose and the global LiDAR map, and usea a kd-tree to
+                                This stage uses a coarse estimate of the agent's pose and the global LiDAR map, and usea a kd-tree to
                                 extract the local map.
 
                                 For this implementation, the coarse estimate of a GPS pose has been assumed, however, the same pipeline can be extended to
                                 GPS-denied environments, using frame-to-frame incremental pose update with only GPS initialisation.
+
+                                The local map is generated via <a href="https://pointclouds.org/documentation/classpcl_1_1octree_1_1_octree_point_cloud_search.html">pcl::octree::OctreePointCloudSearch</a>,
+                                which searches for neighbours within a voxel at a given point which in our case is the initial pose obtained
+                                from <a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion">VINS-Fusion</a>.
                             </p>
                             
                             <p>
                                 <h4  style="text-align:left">Stage 2 : Depth Map Generation</h4>
+                                
                             </p>
                             
                             <p>
