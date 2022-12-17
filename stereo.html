@@ -131,6 +131,15 @@
                             <p>
                                 <h3  style="text-align:left">Stage 4 : Localization</h3>
                             </p>
+
+                            <p>
+                                The final camera pose is obtained by minimizing the depth residual which is the difference between the depth of the map point in
+                                local map and the corresponding stereo depth. This non-linear optimization problem is solved by Ceres-Solver.
+                            </p>
+
+                            <p>
+                                <img src="images/transformation.jpg" style="width: 54%; height: 54%"/><img src="images/TheMath.png" style="width: 45%; height: 45%"/>
+                            </p>
                         </td>
                     </tr>
 
