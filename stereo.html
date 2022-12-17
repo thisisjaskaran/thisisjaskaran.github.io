@@ -70,6 +70,47 @@
 
                         <td style="padding:2.5%;width:60%;vertical-align:middle">
                             <p style="text-align:center">
+                                <h2  style="text-align:center">The Pipeline</h2>
+                            </p>
+                            <p>
+                                <img src='images/pipeline.png'>
+                            </p>
+                            
+                            <p>
+                                In this work, we use a 4-stage process inspired by the <a href="https://ieeexplore.ieee.org/document/8594362">paper</a> "Stereo Camera Localization in 3D LiDAR Maps" by KAIST.
+                            </p>
+
+                            <p>
+                                <h4  style="text-align:left">Stage 1 : Local Map Extraction</h4>
+                                This stage uses a coarse estimate of the agent's pose and the global LiDAR map, and usea a kd-tree to
+                                extract the local map.
+
+                                For this implementation, the coarse estimate of a GPS pose has been assumed, however, the same pipeline can be extended to
+                                GPS-denied environments, using frame-to-frame incremental pose update with only GPS initialisation.
+
+                                The local map is generated via <a href="https://pointclouds.org/documentation/classpcl_1_1octree_1_1_octree_point_cloud_search.html">pcl::octree::OctreePointCloudSearch</a>,
+                                which searches for neighbours within a voxel at a given point which in our case is the initial pose obtained
+                                from <a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion">VINS-Fusion</a>.
+                            </p>
+                            
+                            <p>
+                                <h4  style="text-align:left">Stage 2 : Depth Map Generation</h4>
+                                
+                            </p>
+                            
+                            <p>
+                                <h4  style="text-align:left">Stage 3 : Tracking</h4>
+                            </p>
+                            <p>
+                                <h4  style="text-align:left">Stage 4 : Localization</h4>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr style="padding:0px">
+
+                        <td style="padding:2.5%;width:60%;vertical-align:middle">
+                            <p style="text-align:center">
                                 <h2  style="text-align:center"><name>Libraries Used</name></h2>
                             </p>
                         </td>
@@ -135,47 +176,6 @@
                             
                             <p>
                                 Installation guide to Ceres Solver : [<a href="http://ceres-solver.org/installation.html">link</a>]
-                            </p>
-                        </td>
-                    </tr>
-
-                    <tr style="padding:0px">
-
-                        <td style="padding:2.5%;width:60%;vertical-align:middle">
-                            <p style="text-align:center">
-                                <h2  style="text-align:center">The Pipeline</h2>
-                            </p>
-                            <p>
-                                <img src='images/pipeline.png'>
-                            </p>
-                            
-                            <p>
-                                In this work, we use a 4-stage process inspired by the <a href="https://ieeexplore.ieee.org/document/8594362">paper</a> "Stereo Camera Localization in 3D LiDAR Maps" by KAIST.
-                            </p>
-
-                            <p>
-                                <h4  style="text-align:left">Stage 1 : Local Map Extraction</h4>
-                                This stage uses a coarse estimate of the agent's pose and the global LiDAR map, and usea a kd-tree to
-                                extract the local map.
-
-                                For this implementation, the coarse estimate of a GPS pose has been assumed, however, the same pipeline can be extended to
-                                GPS-denied environments, using frame-to-frame incremental pose update with only GPS initialisation.
-
-                                The local map is generated via <a href="https://pointclouds.org/documentation/classpcl_1_1octree_1_1_octree_point_cloud_search.html">pcl::octree::OctreePointCloudSearch</a>,
-                                which searches for neighbours within a voxel at a given point which in our case is the initial pose obtained
-                                from <a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion">VINS-Fusion</a>.
-                            </p>
-                            
-                            <p>
-                                <h4  style="text-align:left">Stage 2 : Depth Map Generation</h4>
-                                
-                            </p>
-                            
-                            <p>
-                                <h4  style="text-align:left">Stage 3 : Tracking</h4>
-                            </p>
-                            <p>
-                                <h4  style="text-align:left">Stage 4 : Localization</h4>
                             </p>
                         </td>
                     </tr>
