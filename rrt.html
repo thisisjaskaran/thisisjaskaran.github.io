@@ -128,7 +128,7 @@
                             </p>
 
                             <p>
-                                <h4  style="text-align:left">The Encoder</h3>
+                                <h4  style="text-align:center">The Encoder</h3>
                             </p>
 
                             <p>
@@ -155,19 +155,59 @@
                             </p>
 
                             <p>
-                                From this study, we conclude that the finetuning approach performs better.
+                                From this study, we conclude that the finetuning approach performs better. The image below (bottom) shows a mock-up of the encoder training procedure, and the data generation procedure for the encoder (top).
                             </p>
 
                             <p>
                                 <img src='images/training_encoder.png' width="100%">
+                                <img src='images/pipeline_encoder.png' width="100%">
                             </p>
 
                             <p>
-                                <h4  style="text-align:left">The Generator</h3>
+                                <h4  style="text-align:center">The Generator</h3>
                             </p>
 
                             <p>
-                                To retain the asymptotic optimality property, we begin by
+                                To retain the asymptotic optimality property, we begin by generating a random sample in the state space. We then perform a nearest neighbor search to find the target ndoe to extend.
+                                Once we have this node, we are ready to perform the generation operation. The generator is responsible for looking at the local features of a given node, and given the position of the node,
+                                and its heading, generate a set of candidate high-quality samples, which are kinematically feasible. Implicitly, the local map will be generated centered aroudn the robot (say for a LiDAR). This
+                                is convenient for us since it remove the requirement to supply the node position to the model, which will always be centered on the local map.
+                            </p>
+
+                            <p>
+                                We also make use of the fact that RRT* is a single shot planner, and can be used for multiple gial querying. This means that for a given start point, it finds the optimal path to every point in its state space.
+                                We leverage this property during the training of the generator. We train the generator on each node of each trajectory, generated on each map. We perform this operation, by sampling a random start-goal pair for any trajectory.
+                                Using this, we are able to find the local map of the node (start) in its given map, generate a latent space representation of this local map, and use the child node of the RRT* as the ground truth
+                                next node of the sampled node (since we ran the I-RRT* for 5,000 iterations, which is close to groudn truth) as the ground truth value for the generator.
+                            </p>
+
+                            <p>
+                                We also exploit the stochasticity introduced in the system due to the dropout parameter, to ensure we get a stochastic set of predictions from the generator, which ensures we do not get stuck in any local minimas,
+                                and that the asymptotic optimality property is preserved.
+                                <img src='images/pipeline_generator.png' width="100%">
+                                This stochastic generation helps us leverage the parallelization of neural networks, by generating hundreds of candidate points at one go, as opposed to traditional RRTs which only generate one point at a time.
+                            </p>
+
+                            <p>
+                                <h4  style="text-align:center">The Discriminator</h3>
+                            </p>
+
+                            <p>
+                                To retain the asymptotic optimality property, we begin by generating a random sample in the state space. We then perform a nearest neighbor search to find the target ndoe to extend.
+                                Once we have this node, we are ready to perform the generation operation. The generator is responsible for looking at the local features of a given node, and given the position of the node,
+                                and its heading, generate a set of candidate high-quality samples, which are kinematically feasible. Implicitly, the local map will be generated centered aroudn the robot (say for a LiDAR). This
+                                is convenient for us since it remove the requirement to supply the node position to the model, which will always be centered on the local map.
+                            </p>
+
+                            <p>
+                                <h4  style="text-align:center">The Steering Function</h3>
+                            </p>
+
+                            <p>
+                                To retain the asymptotic optimality property, we begin by generating a random sample in the state space. We then perform a nearest neighbor search to find the target ndoe to extend.
+                                Once we have this node, we are ready to perform the generation operation. The generator is responsible for looking at the local features of a given node, and given the position of the node,
+                                and its heading, generate a set of candidate high-quality samples, which are kinematically feasible. Implicitly, the local map will be generated centered aroudn the robot (say for a LiDAR). This
+                                is convenient for us since it remove the requirement to supply the node position to the model, which will always be centered on the local map.
                             </p>
 
                             <p>
