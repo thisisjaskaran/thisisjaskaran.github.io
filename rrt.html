@@ -76,17 +76,19 @@
                                 <h2  style="text-align:center">The Pipeline</h2>
                             </p>
                             <p>
-                                <img src='images/pipeline.png'>
+                                <img src='images/mpc-mpnet.png'>
                             </p>
                             
                             <p>
-                                In this work, we use a 4-stage process inspired by the <a href="https://ieeexplore.ieee.org/document/8594362">paper</a> "Stereo Camera Localization in 3D LiDAR Maps" by KAIST.
+                                In this work, we take inspiration from and seek to extend the MPC-MPNet architecture, for online replanning in cluttered environments. The
+                                above figure shows the pipeline of the MPC-MPNet architecture. Due to lack of reproducible open-source code, this project also involved
+                                extensive dataset generation, development of a data collection pipeline, mdoeling the kinematics of a Dubins car, training the informed sampler,
+                                and finally testing on novel environments.
                             </p>
 
                             <p>
-                                <h3  style="text-align:left">Stage 1 : Local Map Extraction</h3>
-                                This stage uses a coarse estimate of the agent's pose and the global LiDAR map, and usea a kd-tree to
-                                extract the local map.
+                                <h3  style="text-align:left">Phase 1: Dataset Generation</h3>
+                                The project began with 
                             </p>
                             <p>
                                 For this implementation, the coarse estimate of a GPS pose has been assumed, however, the same pipeline can be extended to
