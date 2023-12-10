@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Hi, Rishab Here. Please DELETE the two <script> tags below if you use this HTML, otherwise my analytics will track your page -->
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-102766803-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-102766803-2');
+    </script>
+
+
+    <title>Jaskaran Singh Sodhi</title>
+    
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <meta name="author" content="Jaskaran Singh Sodhi">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="Jaskaran Singh Sodhi | Researcher @ AGV, IIT Kharagpur | Researcher @ AMRL, UT Austin | Robotics">
+    <meta name="keywords" content="Jaskaran Singh Sodhi, IIT Kharagpur, UT Austin, Robotics, Path Planning, SLAM">
+
+    <!-- <link rel="stylesheet" type="text/css" href="stylesheet.css"> -->
+    <link rel="icon" type="image/png" href="images/walle.png">
+</head>
+<body class="bg_colour">
+    <table border=0 class="bg_colour" style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+        <tr style="padding:0px">
+            <td style="padding:0px">
+                
+                <!-- Name tab -->
+                <table border=0 class="bg_colour" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+                    
+                    
+                    <tr style="padding:0px">
+
+                        <td style="padding:2.5%;width:60%;vertical-align:middle">
+                            <p style="text-align:center">
+                                <h1  style="text-align:center"><name>Learned Heuristics for Informed Sampling in Kinematic Planners</name></h1>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr style="padding:0px">
+
+                        <td style="padding:2.5%;width:60%;vertical-align:middle">
+                            <p style="text-align:center">
+                                <h2  style="text-align:center"><name>Introduction</name></h1>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:2.5%;width:10%;max-width:10%">
+                            Sampling-based planners have shown to be advantageous in replanning applications, especially for high dimensions robots. However,  they often fail
+                            for applications where kinematically constrained robots are deployed in challenging environments, such as, an Ackermann car in cluttered indoor
+                            environments. This is owing to primarily the uniform sampling strategy which is at the core of these asymptotically optimal planner. And although
+                            many "informed" variants of these samplers have been developed over the years, few capture the rich information present in a robot's local surrounding
+                            as well as a human does. This introduces the benefit of deep learning in informed samplers. Prior research by <a href="https://arxiv.org/abs/2101.06798">MPC-MPNet</a> has shows
+                            clear merit for this strategy, but it carries its own demerits. While MPC-MPNets are highly accurate and robust, they are offline planners and
+                            do not offer replanning.
+                        </td>
+                    </tr>
+
+                    <tr style="padding:0px">
+
+                        <td style="padding:2.5%;width:60%;vertical-align:middle">
+                            <p style="text-align:center">
+                                <h2  style="text-align:center">The Pipeline</h2>
+                            </p>
+                            <p>
+                                <img src='images/pipeline.png'>
+                            </p>
+                            
+                            <p>
+                                In this work, we use a 4-stage process inspired by the <a href="https://ieeexplore.ieee.org/document/8594362">paper</a> "Stereo Camera Localization in 3D LiDAR Maps" by KAIST.
+                            </p>
+
+                            <p>
+                                <h3  style="text-align:left">Stage 1 : Local Map Extraction</h3>
+                                This stage uses a coarse estimate of the agent's pose and the global LiDAR map, and usea a kd-tree to
+                                extract the local map.
+                            </p>
+                            <p>
+                                For this implementation, the coarse estimate of a GPS pose has been assumed, however, the same pipeline can be extended to
+                                GPS-denied environments, using frame-to-frame incremental pose update with only GPS initialisation.
+                            </p>
+                            
+                            <p>
+                                <img src="images/local1.png" style="width: 54%; height: 54%"/><img src="images/local2.png" style="width: 45%; height: 45%"/>
+                            </p>
+                            
+                            <p>
+                                The local map is generated via <a href="https://pointclouds.org/documentation/classpcl_1_1octree_1_1_octree_point_cloud_search.html">pcl::octree::OctreePointCloudSearch</a>,
+                                which searches for neighbours within a voxel at a given point which in our case is the initial pose obtained
+                                from <a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion">VINS-Fusion</a>.
+                            </p>
+                            
+                            <p>
+                                <h3  style="text-align:left">Stage 2 : Depth Map Generation</h3>
+                            </p>
+
+                            <p>
+                                The left and the right image from the stereo camera is used to compute the disparity map. From disparity map, we obtain the depth of a point using the formula:
+
+                            </p>
+
+                            <p style="text-align:center">
+                                disparity = x - x' = (B*f)/Z
+                            </p>
+                            
+                            <p>
+                                Here, B is baseline, i.e, distance between the left and right camera & f is the focal length of the camera. Z is the depth of that pixel value.
+                            </p>
+
+                            <p>
+                                Example, depth image:
+                            </p>
+
+                            <p>
+                                <img src="images/depth.png" style="width: 100%; height: 100%">
+                            </p>
+                            
+                            <p>
+                                <h3  style="text-align:left">Stage 3 : Tracking</h3>
+                            </p>
+
+                            <p>
+                                Tracking para.
+                            </p>
+
+                            <p>
+                                <h3  style="text-align:left">Stage 4 : Localization</h3>
+                            </p>
+
+                            <p>
+                                The final camera pose is obtained by minimizing the depth residual which is the difference between the depth of the map point in
+                                local map and the corresponding stereo depth. This non-linear optimization problem is solved by Ceres-Solver.
+                            </p>
+
+                            <p>
+                                <img src="images/transformation.jpg" style="width: 55%; height: 55%"/><img src="images/TheMath.png" style="width: 43%; height: 43%"/>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr style="padding:0px">
+
+                        <td style="padding:2.5%;width:60%;vertical-align:middle">
+                            <p style="text-align:center">
+                                <h2  style="text-align:center">Results</h2>
+                            </p>
+
+                            <p>
+                                The green line shows the groud_truth path of the ego vehicle and the red line shows path generated from the localization pipeline.
+                            </p>
+
+                            <p style="text-align:center">
+                                <img src="images/Result.png" style="width: 80%; height: 80%">
+                                <img src="images/Resultzoom.png" style="width: 80%; height: 80%">
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr style="padding:0px">
+
+                        <td style="padding:2.5%;width:60%;vertical-align:middle">
+                            <p style="text-align:center">
+                                <h2  style="text-align:center"><name>Libraries Used</name></h2>
+                            </p>
+
+                            <p style="text-align:left">
+                                <h3  style="text-align:left">OpenCV</name></h3>
+                            </p>
+
+                            <p>
+                                OpenCV (Open Source Computer Vision Library) is an open source computer vision and machine learning software library. Assuming independent streams from the cameras, we use OpenCV to perform blob-matching and get the stereo-camera depth output.
+                            </p>
+
+                            <p>
+                                Installation guide to OpenCV : [<a href="https://docs.opencv.org/4.x/d2/de6/tutorial_py_setup_in_ubuntu.html">link</a>]
+                            </p>
+
+                            <p style="text-align:left">
+                                <h3  style="text-align:left">PCL</h3>
+                            </p>
+
+                            <p>
+                                The Point Cloud Library (PCL) is a standalone, large scale, open project for 2D/3D image and point cloud processing. We use the Point Cloud Library (PCL) for point cloud manipulation methods including kd-tree implementations and plane projections.
+                            </p>
+
+                            <p>
+                                Installation guide to PCL : [<a href="https://pointclouds.org/downloads/">link</a>]
+                            </p>
+
+                            <p style="text-align:left">
+                                <h3  style="text-align:left">Ceres Solver</h3>
+                            </p>
+
+                            <p>
+                                Ceres Solver is an open source C++ library for modeling and solving large, complicated optimization problems. In this project, we use it
+                                to perform photometric residual minimization.
+                            </p>
+                            
+                            <p>
+                                Installation guide to Ceres Solver : [<a href="http://ceres-solver.org/installation.html">link</a>]
+                            </p>
+                        </td>
+                    </tr>
+
+                </tbody></table>
+
+
+<!-- Miscellaneous Projects -->
+
+                
+        <tr>
+            <td>
+                <p>This template is a modification to Jon Barron's <a href="https://jonbarron.info/" target="_blank">website</a>. Find the source code to my website <a href="https://github.com/thisisjaskaran/thisisjaskaran.github.io" target="_blank">here</a>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p></p>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
