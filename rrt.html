@@ -208,10 +208,11 @@
                             </p>
 
                             <p>
-                                To retain the asymptotic optimality property, we begin by generating a random sample in the state space. We then perform a nearest neighbor search to find the target ndoe to extend.
-                                Once we have this node, we are ready to perform the generation operation. The generator is responsible for looking at the local features of a given node, and given the position of the node,
-                                and its heading, generate a set of candidate high-quality samples, which are kinematically feasible. Implicitly, the local map will be generated centered aroudn the robot (say for a LiDAR). This
-                                is convenient for us since it remove the requirement to supply the node position to the model, which will always be centered on the local map.
+                                The steering function is the teacher that keeps their students in line. Once the discriminator selects the most feasible point from the set of candidate point, the steering function is responsible
+                                for propagating the state of the selected code to this new sample. Althought the generator does a pretty good job with spatial reasoning (good sample position), it does not do a very accurate job with orientation,
+                                and this we use the steering function to correct for orientation errors, and ultimately add the new node to the RRT tree.
+                                <img src='images/pipeline_steering.png' width="100%">
+                                For our case, we use a Dubins car model, and this the steering function is just an Ackermann steering function.
                             </p>
 
                             <p>
@@ -222,7 +223,7 @@
                                 The final camera pose is obtained by minimizing the depth residual which is the difference between the depth of the map point in
                                 local map and the corresponding stereo depth. This non-linear optimization problem is solved by Ceres-Solver.
                             </p>
-                            
+
                         </td>
                     </tr>
 
