@@ -88,23 +88,24 @@
 
                             <p>
                                 <h3  style="text-align:left">Phase 1: Dataset Generation</h3>
-                                The project began with 
+                                The project began with the need for a diverse and rich dataset for our learned sampler. This required implementing speed-optimized
+                                RRT, RRT* and <a href="https://arxiv.org/abs/1404.2334">I-RRT*</a> planner, all with kinematic constraints. A <a href="https://github.com/thisisjaskaran/informed-rrt-star">comparative study</a> was
+                                also done for completeness. This resulted in a <strong>custom</strong>, efficient C++ sampling-based planner which could be used to generate huge amounts of data. Using our own
+                                custom planner also offered us the flexibility of integrating any kinematic models we wished to test out, on the go.
                             </p>
                             <p>
-                                For this implementation, the coarse estimate of a GPS pose has been assumed, however, the same pipeline can be extended to
-                                GPS-denied environments, using frame-to-frame incremental pose update with only GPS initialisation.
+                                However, the development of this planner was not a speedy task. Implementing a simple Dubins car model also took multiple iterations. From using
+                                a optimization based approach, which optimized the radius of turning with respect to the goal, and later finalizing the determininstic Ackermann model
+                                to calculate the radius of turning, I explored multiple methods, which exposed me to the many ways of developing kinematic models, especially for speedy dataset generation.
                             </p>
-                            
                             <p>
-                                <img src="images/local1.png" style="width: 54%; height: 54%"/><img src="images/local2.png" style="width: 45%; height: 45%"/>
+                                <img src='images/kinematic_I-RRT.png'>
+                                <img src='images/planner_2.png'>
+                                <img src='images/planner_3.png'>
                             </p>
-                            
                             <p>
-                                The local map is generated via <a href="https://pointclouds.org/documentation/classpcl_1_1octree_1_1_octree_point_cloud_search.html">pcl::octree::OctreePointCloudSearch</a>,
-                                which searches for neighbours within a voxel at a given point which in our case is the initial pose obtained
-                                from <a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion">VINS-Fusion</a>.
+                                Above figures show the kinematic I-RRT* in action on 3 different cluttered scenarios.
                             </p>
-                            
                             <p>
                                 <h3  style="text-align:left">Stage 2 : Depth Map Generation</h3>
                             </p>
