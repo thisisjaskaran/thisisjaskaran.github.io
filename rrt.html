@@ -99,36 +99,20 @@
                                 to calculate the radius of turning, I explored multiple methods, which exposed me to the many ways of developing kinematic models, especially for speedy dataset generation.
                             </p>
                             <p>
-                                <img src='images/kinematic_I-RRT.png' width="220">
-                                <img src='images/planner_2.png' width="220">
-                                <img src='images/planner_3.png' width="220">
+                                <img src='images/kinematic_I-RRT.png' width="230">
+                                <img src='images/planner_2.png' width="230">
+                                <img src='images/planner_3.png' width="230">
                             </p>
                             <p>
                                 Above figures show the kinematic I-RRT* in action on 3 different cluttered scenarios.
                             </p>
                             <p>
-                                <h3  style="text-align:left">Stage 2 : Depth Map Generation</h3>
+                                <h3  style="text-align:left">Phase 2 : Data Collection</h3>
                             </p>
 
                             <p>
                                 The left and the right image from the stereo camera is used to compute the disparity map. From disparity map, we obtain the depth of a point using the formula:
 
-                            </p>
-
-                            <p style="text-align:center">
-                                disparity = x - x' = (B*f)/Z
-                            </p>
-                            
-                            <p>
-                                Here, B is baseline, i.e, distance between the left and right camera & f is the focal length of the camera. Z is the depth of that pixel value.
-                            </p>
-
-                            <p>
-                                Example, depth image:
-                            </p>
-
-                            <p>
-                                <img src="images/depth.png" style="width: 100%; height: 100%">
                             </p>
                             
                             <p>
