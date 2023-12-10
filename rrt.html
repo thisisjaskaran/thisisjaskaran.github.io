@@ -220,8 +220,19 @@
                             </p>
 
                             <p>
-                                The final camera pose is obtained by minimizing the depth residual which is the difference between the depth of the map point in
-                                local map and the corresponding stereo depth. This non-linear optimization problem is solved by Ceres-Solver.
+                                Since what we're developing is a smart planner that identifies local patterns just like a human does, it still needs to have some global sense of direction. During testing, we implement this using carrot planning.
+                                This methods uses a vanilla A* global planner. For all A* waypoints within its visibility range, it picks the furthest waypoint, and similar to a donkey chasing a carrot on a stick, it incrementally follows this waypoint.
+                                Now that we have the carrot, we can use this as an intermediate waypoint to supply to the generator, and so on for the above mentioned pipeline.
+                                <img src='images/pipeline_global_planner.png' width="100%">
+                            </p>
+
+                            <p>
+                                <h3  style="text-align:left">Phase 4 : Testing</h3>
+                            </p>
+
+                            <p>
+                                This is what the complete pipeline would look like.
+                                <img src='images/pipeline_complete.png' width="100%">
                             </p>
 
                         </td>
