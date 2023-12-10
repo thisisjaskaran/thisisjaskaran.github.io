@@ -112,19 +112,62 @@
 
                             <p>
                                 The next and last important stage before wrapping up the data collection stage was to actually develop a streamlined pipeline for data collection.
-
+                                Up to a certain extent, this was done interatively with the dataloader pipeline of the model, and the data augmentation.
+                            </p>
+                            <p>
+                                After exploring different data representation methods, we settled on a heirarchical tree architecture, that stored parent-child relationships of each node.
+                                This also helped us store other valueable information about the relationship between nodes such as kinematic distance costs and radius of turning (including direction of turning).
                             </p>
                             
                             <p>
-                                <h3  style="text-align:left">Stage 3 : Tracking</h3>
+                                <h3  style="text-align:left">Phase 3 : Training Pipeline</h3>
                             </p>
 
                             <p>
-                                Tracking para.
+                                Extending the MPC-MPNet architecture, there are three main learned components in our pipeline.
                             </p>
 
                             <p>
-                                <h3  style="text-align:left">Stage 4 : Localization</h3>
+                                <h4  style="text-align:left">The Encoder</h3>
+                            </p>
+
+                            <p>
+                                To enable the planner to learn local features and incorporate those while sampling informed points, we need to downsample the local information
+                                into a more understandeable form. This is especially true for deployment scenarios, where the raw input might be some high-resolutino data such as a LiDAR.
+                                In our case however, we're training the platform in a binary grid world. So to simulate these real world cases, we define a few parameters.
+                                <ol>
+                                    <li>Visibility Range: This defined the size of the local map. A larger visibility range would theoretically imply more information for the planner to make a more informed decision. However, a smaller range would mean simple latent space representation but shorted path planning horizon.</li>
+                                    <li>Resolution: We define the discretization of the world in terms of its resolutino. Analogous to the visibility range, a higher resolution would mean more information, and thus theoretically better decision-making. And a lower resolution would mean inability to capture fine features, but faster planning.</li>
+                                </ol>
+                            </p>
+
+                            <p>
+                                To generate a low dimensional representation of the local map, we test two approaches.
+                            </p>
+
+                            <p>
+                                First, we attempt piecewise finetuning the encoder and the rest of the planner. This is done by training a variational autoencoder (VAE) using reconstruction loss,
+                                prior to training the MPC-MPNet, and using the latent space as local features representation.
+                            </p>
+                            
+                            <p>
+                                We also experiment with end-to-end training of the encoder with planner, to verify whether it learns task-specific features.
+                            </p>
+
+                            <p>
+                                From this study, we conclude that the finetuning approach performs better.
+                            </p>
+
+                            <p>
+                                <img src='images/training_encoder.png' width="230">
+                            </p>
+
+                            <p>
+                                <h4  style="text-align:left">The Generator</h3>
+                            </p>
+
+                            <p>
+                                <h3  style="text-align:left">Phase 4 : Large-scale Training</h3>
                             </p>
 
                             <p>
