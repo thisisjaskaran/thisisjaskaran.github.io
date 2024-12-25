@@ -1,7 +1,12 @@
 #   ROMEO: Rational Optimized Multi-task Enhancement framework for VQA
 
-<details open>
-<summary>Introduction</summary>
+# Table of contents
+1. [Introduction](#introduction)
+2. [Problem Setup and Dataset](#problem_setup)
+
+<a name="introduction"></a>
+
+## Introduction
 
 In the rapidly evolving domain of autonomous vehicles (AVs), understanding and reasoning about visual scenes is paramount.
 My recent work on the ROMEO framework, developed as part of a collaborative project, tackles some of the most complex challenges
@@ -49,4 +54,6 @@ for the ideal tradeoff between processing and accuracy.
 we explored the capability of generating rationales. ROMEO aids developers and regulators in understanding model decisions,
 a step toward more transparent and accountable autonomous systems.
 
-</details>
+##<a name="problem_setup"></a>
+
+## Problem Setup
