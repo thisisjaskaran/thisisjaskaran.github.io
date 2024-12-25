@@ -119,8 +119,8 @@ images. Some statistics related number of detected objects to the images are:
 We also evaluate heatmaps showing the number of questions that each model answered correctly (rows) but were answered incorrectly
 by other models (columns) in both DA and MC settings.
 
-<img src="da_final_cm.png" alt="da_final_cm" width="200"/>
-<img src="mc_final_cm.png" alt="mc_final_cm" width="200"/>
+<img src="da_final_cm.png" alt="da_final_cm" width="100"/>
+<img src="mc_final_cm.png" alt="mc_final_cm" width="100"/>
 
 From the heatmaps (Figures 4 and 5), we grouped the SoTA multimodal models into two categories:
 - **Strong Models**: GPT4o, LLaMA 3.2 11B, and PaliGemma 3B
