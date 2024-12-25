@@ -97,8 +97,8 @@ images. Some statistics related number of detected objects to the images are:
 - **Standard Deviation**: 6.62
 
 <center>
-<img src="images/object_detections_plot.png" alt="object_detections_plot" width="500"/>
-<img src="images/000000548339.jpg" alt="000000548339" width="500"/>
+<img src="images/object_detections_plot.png" alt="object_detections_plot" width="400"/>
+<img src="images/000000548339.jpg" alt="000000548339" width="400"/>
 </center>
 
 <a name="baselines"></a>
@@ -114,15 +114,15 @@ images. Some statistics related number of detected objects to the images are:
 |    **ClipCap**    | Simple Multimodal |  56.93  |  30.89 |
 | **Llama 3.2 11B** |  SoTA Multimodal  |  83.05  |  59.59 |
 |   **Llava-1.5**   |  SoTA Multimodal  |  32.13  |  29.86 |
-|    **Molmo 7B**   |  SoTA Multimodal  |  58.14  |  34.46 |
+|    **Molmo 7B**   |  SoTA Multimodal  |  58.14  |  64.46 |
 |  **GPT 4o mini**  |  SoTA Multimodal  |  83.58  |  41.33 |
 | **Pali-Gemma 3B** |  SoTA Multimodal  |  77.72  |  47.16 |
 
 We also evaluate heatmaps showing the number of questions that each model answered correctly (rows) but were answered incorrectly
 by other models (columns) in both DA and MC settings.
 
-<img src="images/da_final_cm.png" alt="da_final_cm" width="500"/>
-<img src="images/mc_final_cm.png" alt="mc_final_cm" width="500"/>
+<img src="images/da_final_cm.png" alt="da_final_cm" width="400"/>
+<img src="images/mc_final_cm.png" alt="mc_final_cm" width="400"/>
 
 From the heatmaps (Figures 4 and 5), we grouped the SoTA multimodal models into two categories:
 - **Strong Models**: GPT4o, LLaMA 3.2 11B, and PaliGemma 3B
@@ -155,3 +155,31 @@ The LLM processes the input autoregressively, first generating detailed rational
 ### Training Objective
 
 The training objective is formulated as a composite loss function that optimizes three interdependent tasks: rational generation (L_rationale), VQA answer generation (Lvqa), and self-refinement (L_refine). By leveraging multi-task learning, ROMEO ensures that shared representations across tasks enable more robust, contextually grounded, and generalizable model outputs. The rationale generation acts as a crucial bridge between visual understanding and accurate answering, fostering deeper reasoning capabilities.
+
+### Performance of ROMEO on Rational Generation
+
+|    **Method Type**    | **BLEU-4** | **ROUGE** |
+|:---------------------:|:----------:|:---------:|
+|         GPT 4o        |    16.47   |   44.69   |
+|     Llama 3.2 11B     |    13.39   |   39.55   |
+|      PaliGemma 3B     |    38.02   |   74.56   |
+| ROMEO(RationalAnswer) |  **52.46** | **58.38** |
+
+### Performance of ROMEO on Visual Question Answering
+
+|     **Model**     |  **Method Type**  | **MCQ** | **DA** |
+|:-----------------:|:-----------------:|:-------:|:------:|
+|       **T5**      |      Unimodal     |  12.54  |  0.00  |
+|      **GPT2**     |      Unimodal     |  20.44  |  2.02  |
+|      **CLIP**     | Simple Multimodal |  22.63  |  0.00  |
+|    **VilBERT**    | Simple Multimodal |  22.18  |  8.32  |
+|    **ClipCap**    | Simple Multimodal |  56.93  |  30.89 |
+| **Llama 3.2 11B** |  SoTA Multimodal  |  83.05  |  59.59 |
+|   **Llava-1.5**   |  SoTA Multimodal  |  32.13  |  29.86 |
+|    **Molmo 7B**   |  SoTA Multimodal  |  58.14  |  **64.46** |
+|  **GPT 4o mini**  |  SoTA Multimodal  |  **83.58**  |  41.33 |
+| **Pali-Gemma 3B** |  SoTA Multimodal  |  77.72  |  47.16 |
+| **ROMEO (Direct Answer)** |  STL Multimodal  |  76.92  |  48.64 |
+| **ROMEO (Rationale Answer)** |  MTL Multimodal  |  **83.25**  |  **63.78** |
+
+where STL is Single Task Learning and MTL is Multi-Task Learning (since we learn the rationale as well).
