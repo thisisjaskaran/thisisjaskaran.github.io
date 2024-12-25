@@ -5,7 +5,8 @@ This blog-form illustrates what is extensively covered in the [corresponding rep
 ### Table of Contents
 1. [Introduction](#introduction)
 2. [Problem Setup and Dataset](#problem_setup)
-2. [Baselines](#baselines)
+3. [Baselines](#baselines)
+4. [ROMEO](#romeo)
 
 <a name="introduction"></a>
 
@@ -118,9 +119,37 @@ images. Some statistics related number of detected objects to the images are:
 We also evaluate heatmaps showing the number of questions that each model answered correctly (rows) but were answered incorrectly
 by other models (columns) in both DA and MC settings.
 
-![da_final_cm](images/da_final_cm.png)
-![mc_final_cm](images/mc_final_cm.png)
+<img src="da_final_cm.png" alt="da_final_cm" width="200"/>
+<img src="mc_final_cm.png" alt="mc_final_cm" width="200"/>
 
 From the heatmaps (Figures 4 and 5), we grouped the SoTA multimodal models into two categories:
-- **Strong Models**: GPT4o, LLaMA 3.2 11B, and PaliGemma 3B.
-- **Weak Models**: MolMo 7B and LLaVA 1.5 7B.
+- **Strong Models**: GPT4o, LLaMA 3.2 11B, and PaliGemma 3B
+- **Weak Models**: MolMo 7B and LLaVA 1.5 7B
+
+We also perform a study to analyze how the number of objects present in a scene affects the VQA perforamnce of different strong models.
+
+![Perf_vs_num_objects](images/Perf_vs_num_objects.png)
+
+We found that across models the percentage of questions answered does not get affected much by the number of objects present in the scene.
+
+<a name="romeo"></a>
+
+## Proposed Model: ROMEO
+
+We present the architecture of ROMEO in Figure 1, a rational-optimized multi-task learning framework tailored for enhanced Visual Question Answering
+(VQA). The core innovation lies in generating intermediate rational explanations for questions about images, which subsequently guide the model in
+providing accurate answers. This rational generation enables the framework to better understand visual context and improve response accuracy. For more details on the training objective and loss function math, check out Section 5.2 in the [report](https://drive.google.com/file/d/1uqFTfI87B7pBLKDJ96PFBSIv6MTHd5O_/view?usp=sharing).
+
+![architecture](images/mmml_self_refine_architecture.drawio.pdf)
+
+### The Vision Transformer
+
+The pipeline begins with a vision transformer that encodes the input image into patch embeddings (p1, p2, ...), extracting essential visual features. These embeddings are then projected into the high-dimensional text embedding space using a Visual Mapper, ensuring compatibility with the LLM’s representation. Simultaneously, the Text Embedder processes the instruction prompt tokens (t1, t2, ...). These textual tokens are combined with visual features to form structured input prompts that include the instruction template and VQA question.
+
+### The LLM
+
+The LLM processes the input autoregressively, first generating detailed rational explanations as intermediate outputs (r1, r2, ...), and then producing the final answer embeddings (a1, a2, ...). These two stages—rational generation and answer generation—are integrated into a unified pipeline. To minimize errors and hallucinations, a self-refining loss mechanism aligns visual and textual representations while ensuring coherence in the generated explanations and answers.
+
+### Training Objective
+
+The training objective is formulated as a composite loss function that optimizes three interdependent tasks: rational generation (L_rationale), VQA answer generation (Lvqa), and self-refinement (L_refine). By leveraging multi-task learning, ROMEO ensures that shared representations across tasks enable more robust, contextually grounded, and generalizable model outputs. The rationale generation acts as a crucial bridge between visual understanding and accurate answering, fostering deeper reasoning capabilities.
