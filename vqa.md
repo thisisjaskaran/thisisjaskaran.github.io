@@ -140,7 +140,7 @@ We present the architecture of ROMEO in Figure 1, a rational-optimized multi-tas
 (VQA). The core innovation lies in generating intermediate rational explanations for questions about images, which subsequently guide the model in
 providing accurate answers. This rational generation enables the framework to better understand visual context and improve response accuracy. For more details on the training objective and loss function math, check out Section 5.2 in the [report](https://drive.google.com/file/d/1uqFTfI87B7pBLKDJ96PFBSIv6MTHd5O_/view?usp=sharing).
 
-![architecture](images/mmml_self_refine_architecture.drawio.pdf)
+![architecture](images/mmml_self_refine_architecture.jpg)
 
 ### The Vision Transformer
 
