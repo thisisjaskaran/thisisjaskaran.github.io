@@ -96,8 +96,8 @@ images. Some statistics related number of detected objects to the images are:
 - **Mode**: 5
 - **Standard Deviation**: 6.62
 
-![obj_diversity](images/object_detections_plot.png)
-![yolo](images/000000548339.jpg)
+<img src="object_detections_plot.png" alt="object_detections_plot" width="100"/>
+<img src="000000548339.jpg" alt="000000548339" width="100"/>
 
 <a name="baselines"></a>
 
