@@ -97,8 +97,8 @@ images. Some statistics related number of detected objects to the images are:
 - **Standard Deviation**: 6.62
 
 <center>
-<img src="images/object_detections_plot.png" alt="object_detections_plot" width="300"/>
-<img src="images/000000548339.jpg" alt="000000548339" width="300"/>
+<img src="images/object_detections_plot.png" alt="object_detections_plot" width="500"/>
+<img src="images/000000548339.jpg" alt="000000548339" width="500"/>
 </center>
 
 <a name="baselines"></a>
@@ -121,8 +121,8 @@ images. Some statistics related number of detected objects to the images are:
 We also evaluate heatmaps showing the number of questions that each model answered correctly (rows) but were answered incorrectly
 by other models (columns) in both DA and MC settings.
 
-<img src="images/da_final_cm.png" alt="da_final_cm" width="300"/>
-<img src="images/mc_final_cm.png" alt="mc_final_cm" width="300"/>
+<img src="images/da_final_cm.png" alt="da_final_cm" width="500"/>
+<img src="images/mc_final_cm.png" alt="mc_final_cm" width="500"/>
 
 From the heatmaps (Figures 4 and 5), we grouped the SoTA multimodal models into two categories:
 - **Strong Models**: GPT4o, LLaMA 3.2 11B, and PaliGemma 3B
@@ -130,7 +130,7 @@ From the heatmaps (Figures 4 and 5), we grouped the SoTA multimodal models into 
 
 We also perform a study to analyze how the number of objects present in a scene affects the VQA perforamnce of different strong models.
 
-![Perf_vs_num_objects](images/Perf_vs_num_objects.png)
+<img src="images/Perf_vs_num_objects.png" alt="Perf_vs_num_objects" width="700"/>
 
 We found that across models the percentage of questions answered does not get affected much by the number of objects present in the scene.
 
