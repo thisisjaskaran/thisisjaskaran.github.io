@@ -7,6 +7,8 @@ This blog-form illustrates what is extensively covered in the [corresponding rep
 2. [Problem Setup and Dataset](#problem_setup)
 3. [Baselines](#baselines)
 4. [ROMEO](#romeo)
+5. [Multimodal Router](#multimodal)
+6. [Qualitative Results and Theories](#qualitative)
 
 <a name="introduction"></a>
 
@@ -97,8 +99,8 @@ images. Some statistics related number of detected objects to the images are:
 - **Standard Deviation**: 6.62
 
 <center>
-<img src="images/object_detections_plot.png" alt="object_detections_plot" width="300"/>
-<img src="images/000000548339.jpg" alt="000000548339" width="300"/>
+<img src="images/object_detections_plot.png" alt="object_detections_plot" width="350"/>
+<img src="images/000000548339.jpg" alt="000000548339" width="350"/>
 </center>
 
 <a name="baselines"></a>
@@ -121,8 +123,8 @@ images. Some statistics related number of detected objects to the images are:
 We also evaluate heatmaps showing the number of questions that each model answered correctly (rows) but were answered incorrectly
 by other models (columns) in both DA and MC settings.
 
-<img src="images/da_final_cm.png" alt="da_final_cm" width="300"/>
-<img src="images/mc_final_cm.png" alt="mc_final_cm" width="300"/>
+<img src="images/da_final_cm.png" alt="da_final_cm" width="350"/>
+<img src="images/mc_final_cm.png" alt="mc_final_cm" width="350"/>
 
 From the heatmaps (Figures 4 and 5), we grouped the SoTA multimodal models into two categories:
 - **Strong Models**: GPT4o, LLaMA 3.2 11B, and PaliGemma 3B
@@ -167,19 +169,55 @@ The training objective is formulated as a composite loss function that optimizes
 
 ### Performance of ROMEO on Visual Question Answering
 
-|     **Model**     |  **Method Type**  | **MCQ** | **DA** |
-|:-----------------:|:-----------------:|:-------:|:------:|
-|       **T5**      |      Unimodal     |  12.54  |  0.00  |
-|      **GPT2**     |      Unimodal     |  20.44  |  2.02  |
-|      **CLIP**     | Simple Multimodal |  22.63  |  0.00  |
-|    **VilBERT**    | Simple Multimodal |  22.18  |  8.32  |
-|    **ClipCap**    | Simple Multimodal |  56.93  |  30.89 |
-| **Llama 3.2 11B** |  SoTA Multimodal  |  83.05  |  59.59 |
-|   **Llava-1.5**   |  SoTA Multimodal  |  32.13  |  29.86 |
-|    **Molmo 7B**   |  SoTA Multimodal  |  58.14  |  **64.46** |
-|  **GPT 4o mini**  |  SoTA Multimodal  |  **83.58**  |  41.33 |
-| **Pali-Gemma 3B** |  SoTA Multimodal  |  77.72  |  47.16 |
-| **ROMEO (Direct Answer)** |  STL Multimodal  |  76.92  |  48.64 |
-| **ROMEO (Rationale Answer)** |  MTL Multimodal  |  **83.25**  |  **63.78** |
+|     **Model**               |  **Method Type**  | **MCQ** | **DA**     |
+|:---------------------------:|:-----------------:|:-------:|:----------:|
+|       **T5**                |      Unimodal     |  12.54  |  0.00      |
+|      **GPT2**               |      Unimodal     |  20.44  |  2.02      |
+|      **CLIP**               | Simple Multimodal |  22.63  |  0.00      |
+|    **VilBERT**              | Simple Multimodal |  22.18  |  8.32      |
+|    **ClipCap**              | Simple Multimodal |  56.93  |  30.89     |
+| **Llama 3.2 11B**           |  SoTA Multimodal  |  83.05  |  59.59     |
+|   **Llava-1.5**             |  SoTA Multimodal  |  32.13  |  29.86     |
+|    **Molmo 7B**             |  SoTA Multimodal  |  58.14  |  **64.46** |
+|  **GPT 4o mini**            |  SoTA Multimodal  |**83.58**|  41.33     |
+| **Pali-Gemma 3B**           |  SoTA Multimodal  |  77.72  |  47.16     |
+| **ROMEO (Direct Answer)**   |  STL Multimodal   |  76.92  |  48.64     |
+| **ROMEO (Rationale Answer)**|  MTL Multimodal   |**83.25**|  **63.78** |
 
 where STL is Single Task Learning and MTL is Multi-Task Learning (since we learn the rationale as well).
+
+<a name="multimodal"></a>
+
+## Multimodal Router
+
+We pose model routing as a binary classification problem. Given an open-source VLM O and a proprietary VLM V, the router predicts the best VLM that for a given VQA query. While the open-source VLMs have lower inference cost as compared to the proprietary VLMs, they have weaker performance as well. Thus, to mitigate this cost-accuracy tradeoff, we want our router to capture the patterns in queries using which it makes the best possible choice of VLMs.
+
+![architecture](images/Routing.png)
+
+### Results
+
+One limitation is that our router is designed to operate within single decision-making paradigm, such as cost or performance, rather than integrating and balancing multiple paradigms. In future work, it would be interesting to explore how we can extend our routing method to incorporate multiple decision-making paradigms. We would also explore the varying the decision thresholds effects cost-accuracy trade-offs.
+
+Our router was trained to route prompts to either GPT-4o mini or Llama 3.2 11B such that we minimize cost while retaining performance. The router’s objective to route to the cheaper model (Llama) whenever it was correct and to route to the expensive model (GPT-4o) only in cases where the cheaper model was incorrect, but the expensive model was correct. When we created router labels for the A-OKVQA train set, we ended up with 14190 questions routed to Llama while only 1679 questions routed to GPT-4o. The number of usable training samples was not sufficient due to the class imbalance leading to a router that had nearly random performance. In future work, we plan to mitigate this by exploring data augmentation techniques and using other VQA datasets to obtain sufficient samples to train a better router.
+
+<a name="qualitative"></a>
+
+## Qualitative Results and Theories
+
+We observe several key patterns amongst the chosen models:
+
+1. **Failure in Dark Images and Complex Reasoning**: Across multiple examples, models struggle with dark images and tasks requiring complex reasoning. For instance, predicting the behavior of a cat or identifying distant objects like shampoo bottles remains challenging. ROMEO shows improvement by generating rational explanations that enhance understanding, though it still faces difficulties in dim lighting conditions.
+
+2. **Weak Models Outperforming Strong Models in Specific Cases**: In simpler scenes, weaker models such as MolMo 7B and LLaVA 1.5 7B occasionally outperform stronger models like GPT4o and LLaMA. This is often due to less complex reasoning requirements or domain-specific knowledge being less critical, allowing weaker models to perform adequately.
+
+3. **Cases Requiring OCR, Detailed Reasoning, and Spatial Analysis**: Strong models generally excel in tasks requiring Optical Character Recognition (OCR), detailed reasoning about object interactions, or spatial analysis. ROMEO’s integration of rational generation aids in handling these complex scenarios effectively.
+
+4. **Spatial Reasoning and Global Knowledge**: Open-source models like LLaMA and PaliGemma outperform others in tasks involving spatial reasoning or requiring global knowledge, such as identifying sports positions. ROMEO benefits from its multi-task learning approach, which supports robust generalization across diverse tasks.
+
+### Theories for Failure Explanation
+- **GPT4o**: Struggles with nuanced reasoning and spatial understanding when global knowledge or fine-grained object recognition is required.
+- **LLaMA 3.2 11B**: Performs well generally but struggles with visual ambiguity and finegrained details.
+- **PaliGemma 3B**: Strong performance overall but occasionally fails with external commonsense knowledge or detailed recognition tasks.
+- **MolMo 7B**: Struggles with complex reasoning tasks and detailed visual analysis.
+- **LLaVA 1.5 7B**: Limited ability to handle complex visual reasoning tasks.
+- **ROMEO**: While ROMEO excels in generating rational explanations, it occasionally fails due to lack of specific domain knowledge, such as identifying cow breeds. It also struggles with spatial reasoning in certain scenarios, such as confusing the hour and minute hands on clocks
