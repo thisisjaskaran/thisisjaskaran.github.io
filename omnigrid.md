@@ -6,6 +6,7 @@ This blog-form illustrates what is extensively covered in the [corresponding rep
 
 ### Table of Contents
 1. [Introduction](#introduction)
+2. [Methodology](#methodology)
 
 <a name="introduction"></a>
 
@@ -23,3 +24,16 @@ and multi-fisheye depth-to-point cloud prediction. Additionally, we explore this
 can be found [here](https://github.com/WarrG3X/omnigrid).
 
 ![drone setup](images/drone_setup.png)
+
+<a name="methodology"></a>
+
+## Methodology
+
+For UAVs, the conventional approach is to use a multi-camera setup to have some spatial reasoning, and this is a
+prevalent research direction. We do not aim to solve SLAM, 3D reconstruction, or point cloud mapping.
+The project aims to predict point clouds, in a UAV-centered coordinate frame. The input to the deep learning model
+will be the feed from all the fisheye cameras. The output of the model will be a point cloud of the environment.
+Our model architecture is shown in the figure below. It consists of two sequential architectures. The first one predicts the
+depth image from the fisheye image input. The predicted depth image is further fed into the second network, which predicts the point cloud.
+
+![omnigrid architecture](images/omnigrid_architecture.png)
