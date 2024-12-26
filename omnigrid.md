@@ -118,7 +118,7 @@ The method extends to all six fisheye cameras, where the depth images, predicted
 quently inputted into the point cloud prediction network.
 
 <img src="images/pre_rollout.png" alt="pre_rollout" width="200"/>
-<img src="images/2_merge.jpg" alt="2_merge" width="4update image sizes00"/>
+<img src="images/2_merge.jpg" alt="2_merge" width="400"/>
 
 The architectural framework for predicting depth images is structured as follows: The model processes a 10-channel
 input comprising three fisheye images (each contributing three channels) from a given triplet, supplemented by a
