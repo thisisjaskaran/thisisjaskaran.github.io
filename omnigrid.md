@@ -117,8 +117,8 @@ estimate from the DINOv2 model for a singular camera, outputting depth estimates
 The method extends to all six fisheye cameras, where the depth images, predicted in an analogous manner, are subse-
 quently inputted into the point cloud prediction network.
 
-<img src="images/pre_rollout.png" alt="pre_rollout" width="300"/>
-<img src="images/2_merge.jpg" alt="2_merge" width="300"/>
+<img src="images/pre_rollout.png" alt="pre_rollout" width="200"/>
+<img src="images/2_merge.jpg" alt="2_merge" width="4update image sizes00"/>
 
 The architectural framework for predicting depth images is structured as follows: The model processes a 10-channel
 input comprising three fisheye images (each contributing three channels) from a given triplet, supplemented by a
@@ -139,8 +139,8 @@ images. This provides a coarse initialization and enables the model to learn the
 
 ### Point Cloud Prediction
 
-<img src="images/dinov2_lower.png" alt="dinov2_lower" width="300"/>
-<img src="images/dinov2_upper.png" alt="dinov2_upper" width="300"/>
+<img src="images/dinov2_lower.png" alt="dinov2_lower" width="350"/>
+<img src="images/dinov2_upper.png" alt="dinov2_upper" width="350"/>
 
 The proposed network architecture is designed to process depth images from corresponding triplets to generate point
 clouds. Specifically, depth images from the upper and lower triplets are concatenated and inputted into the network
@@ -162,17 +162,17 @@ At the end of the project, we were not able to completely integrate the sub-modu
 of generating a pointcloud from multiple fish-eye images. This was because we faced several challenges which made
 downstream tasks even harder:
 
-1. Intrinsics Calibration: Through many low-level implementations and ablations, we realized that the projection
+1. **Intrinsics Calibration**: Through many low-level implementations and ablations, we realized that the projection
 of LiDAR to the fisheye frame (to obtain ground truth depth) was extremely sensitive to the distortion parameters
 of our camera. This made calibration very crucial. Upon further investigating the source package used for
 calibration (kalibr), we found out that the resolution of the calibration was not granular enough for our purpose.
 
-2. Sparse Data: For our current dataset, we are using local LiDAR point clouds corresponding to our camera
+2. **Sparse Data**: For our current dataset, we are using local LiDAR point clouds corresponding to our camera
 feeds. However, since the point cloud is very sparse, the ground truth data is also biased toward predicting
 dark outputs (One future direction that we were looking to implement is performing
 LiDAR-IMU SLAM, and then using the camera poses, to project a dense point cloud instead of sparse.
 
-3. Model Size: The training process was also a little heavy since the training pipeline involved loading DINOv2,
+3. **Model Size**: The training process was also a little heavy since the training pipeline involved loading DINOv2,
 Metric3D, 6 RGB images (1028x1224), and the target point cloud. This made us resort to stochastic training
 (batch size = 1). We also later resorted to pre-processing data and saving DINOv2 and Metric3D outputs, to
 save training time per epoch (even though that limited data ablations). The final training time was still quite
