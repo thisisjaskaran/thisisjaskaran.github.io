@@ -2,6 +2,11 @@
 
 This blog-form illustrates what is extensively covered in the [corresponding report](https://drive.google.com/file/d/1uqFTfI87B7pBLKDJ96PFBSIv6MTHd5O_/view?usp=sharing).
 
+> Abstract: This work explores
+(i) a self-refinement method to ground VQA respondes to the query image (to reduce hallucinations),
+(ii) a multimodal routing framework to learn failure patterns in SoTA models,
+in the realm of common sense reasoning for self-driving.
+
 ### Table of Contents
 1. [Introduction](#introduction)
 2. [Problem Setup and Dataset](#problem_setup)
